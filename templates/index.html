@@ -15,7 +15,8 @@
             document.getElementById("stop").addEventListener("click", stop)
             document.getElementById("status").addEventListener("click", status)
             let id = Date.now()
-            let ws = new WebSocket(window.location.href + 'ws/' + id)
+            document.cookie = "user_id" + "=" + id;
+            let ws = new WebSocket("ws://" + window.location.host + '/ws/' + id)
             ws.onmessage = function(event) {
                 let data = document.getElementById("data")
                 let content = document.createTextNode(event.data) 
