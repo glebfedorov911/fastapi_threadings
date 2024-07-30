@@ -37,7 +37,6 @@ async def websocket_endpoint(us_id: int, websocket: WebSocket, response: Respons
     global user_data
     
     user_data[us_id] = {"events": events.copy(), "threads": threads.copy(), "counter": counter.copy()}
-    print(user_data)
     await websocket.accept()
     try:
         while True:
