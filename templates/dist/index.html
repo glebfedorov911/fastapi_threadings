@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Тест</title>
+    </head>
+    <body>
+        <h1>Тест</h1>
+        <div id="data"></div>
+        <div id="messages"></div>
+        <button id="start">Старт</button>
+        <button id="stop">Стоп</button>
+        <button id="status">Статус</button>
+        <script>
+            document.getElementById("start").addEventListener("click", start)
+            document.getElementById("stop").addEventListener("click", stop)
+            document.getElementById("status").addEventListener("click", status)
+            let id = Date.now()
+            let ws = new WebSocket(window.location.href + 'ws/' + id)
+            ws.onmessage = function(event) {
+                let data = document.getElementById("data")
+                let content = document.createTextNode(event.data) 
+                data.innerText = content.data
+            }
+            function start() {
+                fetch(window.location.href + "start/")
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("messages").textContent = JSON.stringify(data, null, 2)
+                    })
+                    .catch(error => console.error("Ошибка:", error))
+            }
+
+            function stop() {
+                fetch(window.location.href + "stop/")
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("messages").textContent = JSON.stringify(data, null, 2)
+                    })
+                    .catch(error => console.error("Ошибка:", error))
+            }
+
+            function status() {
+                fetch(window.location.href + "status/")
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("messages").textContent = JSON.stringify(data, null, 2)
+                    })
+                    .catch(error => console.error("Ошибка:", error))
+            }
+        </script> 
+    </body>
+</html>
