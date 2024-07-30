@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "fastapi-threadings"
+version = "0.1.0"
+description = ""
+authors = ["gfedorov911 <fedorov22134@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.111.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
