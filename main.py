@@ -12,7 +12,6 @@ import asyncio
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 count_of_threadings = 10
-events: list[Event] = [Event()] * count_of_threadings
 threads: list[Thread] = [None] * count_of_threadings
 counter = [0] * count_of_threadings
 
@@ -36,7 +35,7 @@ async def get(request: Request):
 async def websocket_endpoint(us_id: int, websocket: WebSocket, response: Response):
     global user_data
     
-    user_data[us_id] = {"events": events.copy(), "threads": threads.copy(), "counter": counter.copy()}
+    user_data[us_id] = {"events": [Event() for _ in range(count_of_threadings)], "threads": threads.copy(), "counter": counter.copy()}
     await websocket.accept()
     try:
         while True:
